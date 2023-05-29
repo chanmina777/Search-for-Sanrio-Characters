@@ -10,6 +10,7 @@ typedef struct __sanrio{
     char seikaku1[100]; //性格1
     char seikaku2[100]; //性格2
     struct __sanrio *next;
+    struct __sanrio *prev;
 } Sanrio; 
 
 void print(Sanrio *top){
@@ -66,12 +67,12 @@ void search_year(Sanrio *head){
     
 }
 
-void delete(Sanrio *head){
+void delete(Sanrio *head, Sanrio *del){
     int dou = 0;
     int yes;
     int itu;
     char delname[100];
-    Sanrio *del;
+    Sanrio *y;
 
     printf("どの条件で削除しますか。1:名前, 2:年\n 条件 ");
     scanf("%d", &dou);
@@ -98,11 +99,31 @@ void delete(Sanrio *head){
         }
 
         printf("%sのデータを削除します。\n", delname);
+        if (head == del){
+            head = head->next;
+        } else {
+            y = head; //yは飛ばす前のひとつ前
+            while (1){
+                if (y->next == del){ //yの次が削除したいやつ
+                    y->next = del->next; // y->next = y->next->next
+                    break;
+                }
+                y = y->next;
+            }   
+        }
 
         printf("削除後の一覧をみたいですか? 1:yes or 2:no\n");
         scanf("%d", &yes);
         if(yes == 1){
-            print(head);
+
+            Sanrio *tmp;
+            tmp = head;
+
+            while(tmp != NULL){
+                printf("name[%s] year[%d] day[%d] like[%s] seikaku1[%s] seikaku2[%s]\n",
+                tmp->name, tmp->year, tmp->day, tmp->like, tmp->seikaku1, tmp->seikaku2);
+                tmp = tmp->next;
+            }
         } else {
             printf("終了します\n");
         }
@@ -117,6 +138,7 @@ int main(void){
     Sanrio *head = NULL;
     Sanrio *tail = NULL;
     Sanrio *data;
+    Sanrio *del;
 
     fp = fopen(fname, "r");
     if(fp == NULL){
@@ -162,7 +184,7 @@ int main(void){
     } else if(number == 3){
         search_year(head);
     } else if (number == 4){
-        delete(head);
+        delete(head, del);
     } else {
         printf("1,2,3,4,5のいずれかを入力してください。\n");
     }
