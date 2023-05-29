@@ -28,6 +28,7 @@ void print(Sanrio *top){
 
 void search_name(Sanrio *head){
     char who[100];
+    int num;
     printf("プロフィールを知りたいキャラの名前を入力してください:");
     scanf("%s",who);
 
@@ -42,6 +43,15 @@ void search_name(Sanrio *head){
         tmp = tmp->next;
     }
     
+    if(tmp != NULL){
+        printf("%sに対応する構造体のアドレスは以下の通りです。\n", who);
+        printf("  name: %p\n", &(tmp->name));
+        printf("  year: %p\n", &(tmp->year));
+        printf("  day: %p\n", &(tmp->day));
+        printf("  like: %p\n", &(tmp->like));
+        printf("  seikaku1: %p\n", &(tmp->seikaku1));
+        printf("  seikaku2: %p\n", &(tmp->seikaku2));
+    }
 }
 
 void search_year(Sanrio *head){
@@ -94,8 +104,6 @@ void delete(Sanrio *head, Sanrio *del){
         while(del != NULL){
             if(strcmp(del->name, delname) == 0){
                 break;
-            } else {
-                printf("その名前のキャラはいないよ泣 もう一度確認してね！")
             }
             del = del->next;
         }
@@ -176,7 +184,7 @@ int main(void){
         check = 1;
     }
 
-    printf("どのような操作をしますか？\n 1:一覧表示, 2:検索(名前指定) 3:検索(デビュー年) 4:削除 5:登録\n 実行番号:");
+    printf("どのような操作をしますか？\n 1:一覧表示, 2:検索(名前指定) 3:検索(デビュー年) 4:削除 5:\n 実行番号:");
     scanf("%d", &number);
     if(number == 1){
         printf("一覧を表示します\n");
