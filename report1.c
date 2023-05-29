@@ -94,6 +94,8 @@ void delete(Sanrio *head, Sanrio *del){
         while(del != NULL){
             if(strcmp(del->name, delname) == 0){
                 break;
+            } else {
+                printf("その名前のキャラはいないよ泣 もう一度確認してね！")
             }
             del = del->next;
         }
