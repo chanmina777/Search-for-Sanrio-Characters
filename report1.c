@@ -31,7 +31,7 @@ void search_name(Sanrio *head){
     int num;
     int a = 0;
 
-    printf("プロフィールを知りたいキャラの名前を入力してください:");
+    printf("プロフィールを知りたいキャラの名前を入力してね♥:");
     scanf("%s",who);
 
     Sanrio *tmp = head;
@@ -56,14 +56,14 @@ void search_name(Sanrio *head){
     }
 
     if(a!=1){
-        printf("その名前のキャラはいないよ泣\n");
+        printf("その名前のキャラはいないよ泣😢\n");
     }
 }
 
 void search_year(Sanrio *head){
     int nen;
     int a = 0;
-    printf("その年にキャラが誕生したかしりたい年を入力してください:");
+    printf("その年にキャラが誕生したか知りたい年を入力してね♥:");
     scanf("%d", &nen);
 
     Sanrio *tmp = head;
@@ -78,7 +78,7 @@ void search_year(Sanrio *head){
     }
 
     if(a!=1){
-        printf("その年にデビューしたサンリオキャラはいないよ泣\n");
+        printf("その年にデビューしたサンリオキャラはいないよ泣😢\n");
     }
     
 }
@@ -90,11 +90,11 @@ void delete(Sanrio *head, Sanrio *del){
     char delname[100];
     Sanrio *y;
 
-    printf("どの条件で削除しますか。1:名前, 2:年\n 条件 ");
+    printf("どの条件で削除する?1:名前, 2:年\n 条件 ");
     scanf("%d", &dou);
 
     if(dou == 1){
-        printf("誰のデータを削除しますか?:");
+        printf("誰のデータを削除する?:");
         getchar();
         fgets(delname, 100, stdin);
 
@@ -114,7 +114,7 @@ void delete(Sanrio *head, Sanrio *del){
             del = del->next;
         }
 
-        printf("%sのデータを削除します。\n", delname);
+        printf("%sのデータを削除するね‼。\n", delname);
         if (head == del){
             head = head->next;
         } else {
@@ -128,7 +128,7 @@ void delete(Sanrio *head, Sanrio *del){
             }   
         }
 
-        printf("削除後の一覧をみたいですか? 1:yes or 2:no\n");
+        printf("削除後の一覧を見たいかな? 1:yes or 2:no\n");
         scanf("%d", &yes);
         if(yes == 1){
 
@@ -141,7 +141,7 @@ void delete(Sanrio *head, Sanrio *del){
                 tmp = tmp->next;
             }
         } else {
-            printf("終了します\n");
+            printf("終了するね‼\n");
         }
     }
 }
@@ -150,7 +150,7 @@ int main(void){
     FILE *fp;
     char fname[] = "data2.csv";
     char line[256]; //行の最大長に応じてサイズを調整する
-    int number, check = 0; //操作
+    int number, check = 1; //操作
     Sanrio *head = NULL;
     Sanrio *tail = NULL;
     Sanrio *data;
@@ -183,27 +183,33 @@ int main(void){
             token = strtok(NULL, "\n");
             strcpy(data->seikaku2, token);
             data->seikaku2[strlen(data->seikaku2) -1] = '\0';
-
+            5
             data->next = head;
             head = data;
         }
         check = 1;
     }
 
-    printf("どのような操作をしますか？\n 1:一覧表示, 2:検索(名前指定) 3:検索(デビュー年) 4:削除 5:\n 実行番号:");
-    scanf("%d", &number);
-    if(number == 1){
-        printf("一覧を表示します\n");
-        print(head);
-    } else if (number == 2){
-        search_name(head);
-    } else if(number == 3){
-        search_year(head);
-    } else if (number == 4){
-        delete(head, del);
-    } else {
-        printf("1,2,3,4,5のいずれかを入力してください。\n");
+    while(1){
+        printf("何したい？\n 1:一覧表示, 2:検索(名前指定) 3:検索(デビュー年) 4:削除 5:終了\n 実行番号:");
+        scanf("%d", &number);
+        if(number == 1){
+            printf("一覧を表示するね‼\n");
+            print(head);
+        } else if (number == 2){
+            search_name(head);
+        } else if(number == 3){
+            search_year(head);
+        } else if (number == 4){
+            delete(head, del);
+        } else if (number == 5){
+            printf("処理を終了するね‼\n");
+            break;
+        } else {
+            printf("1,2,3,4,5のいずれかを入力してほしいな💦。\n");
+        }
     }
+    
 
     
     fclose(fp);
