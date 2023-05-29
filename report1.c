@@ -29,6 +29,8 @@ void print(Sanrio *top){
 void search_name(Sanrio *head){
     char who[100];
     int num;
+    int a = 0;
+
     printf("プロフィールを知りたいキャラの名前を入力してください:");
     scanf("%s",who);
 
@@ -38,19 +40,23 @@ void search_name(Sanrio *head){
         if(strcmp(tmp->name, who) == 0){
             printf("name[%s] year[%d] day[%d] like[%s] seikaku1[%s] seikaku2[%s]\n",
                 who, tmp->year, tmp->day, tmp->like, tmp->seikaku1, tmp->seikaku2);
+                a = 1;
+            if(tmp != NULL){
+                printf("%sに対応する構造体のアドレスはこんな感じだよ!。\n", who);
+                printf("  name: %p\n", &(tmp->name));
+                printf("  year: %p\n", &(tmp->year));
+                printf("  day: %p\n", &(tmp->day));
+                printf("  like: %p\n", &(tmp->like));
+                printf("  seikaku1: %p\n", &(tmp->seikaku1));
+                printf("  seikaku2: %p\n", &(tmp->seikaku2));
+            }
             break;
         }
         tmp = tmp->next;
     }
-    
-    if(tmp != NULL){
-        printf("%sに対応する構造体のアドレスは以下の通りです。\n", who);
-        printf("  name: %p\n", &(tmp->name));
-        printf("  year: %p\n", &(tmp->year));
-        printf("  day: %p\n", &(tmp->day));
-        printf("  like: %p\n", &(tmp->like));
-        printf("  seikaku1: %p\n", &(tmp->seikaku1));
-        printf("  seikaku2: %p\n", &(tmp->seikaku2));
+
+    if(a!=1){
+        printf("その名前のキャラはいないよ泣\n");
     }
 }
 
