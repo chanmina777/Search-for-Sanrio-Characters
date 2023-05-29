@@ -66,6 +66,49 @@ void search_year(Sanrio *head){
     
 }
 
+void delete(Sanrio *head){
+    int dou = 0;
+    int yes;
+    int itu;
+    char delname[100];
+    Sanrio *del;
+
+    printf("どの条件で削除しますか。1:名前, 2:年\n 条件 ");
+    scanf("%d", &dou);
+
+    if(dou == 1){
+        printf("誰のデータを削除しますか?:");
+        getchar();
+        fgets(delname, 100, stdin);
+
+        for(int i = 0; i < 100; i++){
+            if (delname[i] == '\n') {
+                delname[i] = '\0';
+                break;
+            }
+        }
+
+        del = head;
+
+        while(del != NULL){
+            if(strcmp(del->name, delname) == 0){
+                break;
+            }
+            del = del->next;
+        }
+
+        printf("%sのデータを削除します。\n", delname);
+
+        printf("削除後の一覧をみたいですか? 1:yes or 2:no\n");
+        scanf("%d", &yes);
+        if(yes == 1){
+            print(head);
+        } else {
+            printf("終了します\n");
+        }
+    }
+}
+
 int main(void){
     FILE *fp;
     char fname[] = "data2.csv";
@@ -118,6 +161,8 @@ int main(void){
         search_name(head);
     } else if(number == 3){
         search_year(head);
+    } else if (number == 4){
+        delete(head);
     } else {
         printf("1,2,3,4,5のいずれかを入力してください。\n");
     }
