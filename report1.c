@@ -43,6 +43,7 @@ void search_name(Sanrio *head){
                 a = 1;
             if(tmp != NULL){
                 printf("%sに対応する構造体のアドレスはこんな感じだよ!。\n", who);
+                //printf("%d", sizeof(tmp->like) ); 各項目のアドレスの大きさ確認
                 printf("  name: %p\n", &(tmp->name));
                 printf("  year: %p\n", &(tmp->year));
                 printf("  day: %p\n", &(tmp->day));
@@ -201,22 +202,33 @@ int main(void){
             scanf("%s", tmp);
         }
         number = (int)(tmp[0] - '0');
-        if(number == 1){
-            printf("一覧を表示するね‼\n");
-            print(head);
-        } else if (number == 2){
-            search_name(head);
-        } else if(number == 3){
-            search_year(head);
-        } else if (number == 4){
-            delete(head, del);
-        } else if (number == 5){
-            printf("処理を終了するね‼\n");
-            break;
-        } else {
-            printf("1,2,3,4,5のいずれかを入力してほしいな💦。\n");
+
+        switch (number){
+            case 1:
+                printf("一覧を表示するね‼\n");
+                print(head);
+                break;
+            
+            case 2:
+                search_name(head);
+                break;
+
+            case 3:
+                search_year(head);
+                break;
+            
+            case 4:
+                delete(head, del);
+            
+            case 5:
+                printf("処理を終了するね‼\n");
+                return 0;
+
+            default:
+                printf("1,2,3,4,5のいずれかを入力してほしいな💦。\n");
         }
     }
+
     
 
     
